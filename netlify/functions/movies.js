@@ -16,7 +16,7 @@ exports.handler = async function(event) {
   let moviesFromCsv = await csv(moviesFile)
 
   // write the movies to the back-end console, check it out
-  console.log(moviesFromCsv)
+  console.log(moviesFromCsv[5])
 
   // 🔥 hw6: your recipe and code starts here!
   let year = event.queryStringParameters.year
@@ -25,7 +25,7 @@ exports.handler = async function(event) {
   if (year == undefined || genre == undefined) {
     return {
       statusCode: 200, // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
-      body: `Nope!` // a string of data
+      body: `ERROR: make sure to enter the year and genre in the url, our team is too lazy to create a front end form` // a string of data
     }
   }
   else {
@@ -36,12 +36,22 @@ exports.handler = async function(event) {
 
     for (let i=0; i < moviesFromCsv.length; i++) {
 
-    }
+      if (moviesFromCsv[i].startYear == year && moviesFromCsv[i].genres == genre )
+    {
+      let movieToReturn = { 
 
+        primaryTitle : moviesFromCsv[i].primaryTitle ,
+        releaseYear : moviesFromCsv[i].startYear ,
+        genre : moviesFromCsv[i].genres
+      }
+    returnValue.movies.push(movieToReturn)
+    } }
+
+    returnValue.numResults = returnValue.movies.length
     // a lambda function returns a status code and a string of data
     return {
       statusCode: 200, // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
-      body: `Hello from the back-end!` // a string of data
+      body: JSON.stringify(returnValue) // a string of data
     }
   }
 }

@@ -16,7 +16,7 @@ exports.handler = async function(event) {
   let moviesFromCsv = await csv(moviesFile)
 
   // write the movies to the back-end console, check it out
-  console.log(moviesFromCsv[5])
+  console.log(moviesFromCsv)
 
   // 🔥 hw6: your recipe and code starts here!
   let year = event.queryStringParameters.year
@@ -36,8 +36,8 @@ exports.handler = async function(event) {
 
     for (let i=0; i < moviesFromCsv.length; i++) {
 
-      if (moviesFromCsv[i].startYear == year && moviesFromCsv[i].genres == genre )
-    {
+      if (moviesFromCsv[i].startYear == year && moviesFromCsv[i].genres == genre)
+      {if (moviesFromCsv[i].runtineMinutes == "\\\\N") { i=i+1}
       let movieToReturn = { 
 
         primaryTitle : moviesFromCsv[i].primaryTitle ,

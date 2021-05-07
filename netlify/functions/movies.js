@@ -36,9 +36,9 @@ exports.handler = async function(event) {
 
     for (let i=0; i < moviesFromCsv.length; i++) {
 
-      if (moviesFromCsv[i].startYear == year && moviesFromCsv[i].genres == genre)
-      {if (moviesFromCsv[i].runtineMinutes == "\\\\N") { i=i+1}
-      let movieToReturn = { 
+      if (moviesFromCsv[i].startYear == year && moviesFromCsv[i].genres == genre && moviesFromCsv[i].runtimeMinutes !== `\\N`)
+      {
+        let movieToReturn = { 
 
         primaryTitle : moviesFromCsv[i].primaryTitle ,
         releaseYear : moviesFromCsv[i].startYear ,
